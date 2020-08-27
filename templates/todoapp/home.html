@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+<h1><a href="{% url 'todoapp:createtask' %}">CREATE</a></h1>
+<hr>
+<table border="3" width="100%">
+    <tr>
+        <th>TO_DO</th>
+
+        <th>IN-PROGRESS</th>
+
+        <th>DONE</th>
+    </tr>
+
+    {% if tasklist %}
+    {% for list in tasklist %}
+    <tr>
+        <td>
+            {% if list.task_status == 'todo' %}
+            <table border="2">
+                <tr>
+                    <td>{{list.task_title}}</td>
+                    <td><a href="{% url 'todoapp:update' list.id  %}"> UPDATE</a></td>
+                    <td><a href="{% url 'todoapp:delete' list.id  %}"> DELETE </a></td>
+                </tr>
+            </table>
+        </td>
+        {% endif %}
+
+        <td>
+            {% if list.task_status == 'in-progress' %}
+            <table border="2">
+                <tr>
+                    <td>{{list.task_title}}</td>
+                    <td><a href="{% url 'todoapp:update' list.id  %}"> UPDATE</a></td>
+                    <td><a href="{% url 'todoapp:delete' list.id  %}"> DELETE </a></td>
+                </tr>
+            </table>
+            {% endif %}
+        </td>
+        <td>
+            {% if list.task_status == 'done' %}
+            <table border="2">
+                <tr>
+                    <td>{{list.task_title}}</td>
+                    <td><a href="{% url 'todoapp:update' list.id  %}"> UPDATE</a></td>
+                    <td><a href="{% url 'todoapp:delete' list.id  %}"> DELETE </a></td>
+                </tr>
+            </table>
+        </td>
+        {% endif %}
+    </tr>
+
+    {% endfor %}
+    {% else %}
+    <em>NO data</em>
+    {% endif %}
+</table>
+
+</body>
+</html>
